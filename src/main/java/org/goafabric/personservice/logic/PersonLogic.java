@@ -5,28 +5,36 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 @Component
 public class PersonLogic {
     public Mono<Person> getById(String id) {
         return Mono.just(
-                Person.builder().build());
+                createPerson());
     }
 
     public Flux<Person> findAll() {
-        return Flux.fromIterable(new ArrayList<Person>());
+        return Flux.fromIterable(
+                Arrays.asList(
+                    createPerson(), createPerson(), createPerson()));
     }
 
     public Mono<Person> findByIsoCode(String firstName) {
         return Mono.just(
-                Person.builder().build());
+                createPerson());
     }
 
 
     public Mono<Person> save(Person person) {
         return Mono.just(
-                Person.builder().build());
+                createPerson());
     }
 
+    private Person createPerson() {
+        return Person.builder()
+                .firstName("john")
+                .lastName("doe " + System.currentTimeMillis())
+                .build();
+    }
 }

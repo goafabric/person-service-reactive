@@ -1,9 +1,9 @@
 package org.goafabric.personservice.service.dto;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
 
-@Data
+@Value
 @Builder
 public class Person {
     private String firstName;
