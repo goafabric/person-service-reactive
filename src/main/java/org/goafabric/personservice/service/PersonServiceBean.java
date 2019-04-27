@@ -10,7 +10,7 @@ import java.util.List;
         produces = "application/json")
 
 @RestController
-public class PersonService {
+public class PersonServiceBean {
 
     @GetMapping("")
     public String welcome () {

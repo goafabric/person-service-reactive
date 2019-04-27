@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @Slf4j
-public class PersonServiceReactive {
+public class PersonServiceReactiveBean {
     @Autowired
     private PersonLogic personLogic;
 

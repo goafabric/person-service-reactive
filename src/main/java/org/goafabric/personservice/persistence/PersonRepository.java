@@ -10,30 +10,32 @@ import java.util.Arrays;
 public class PersonRepository {
     public Mono<PersonBo> getById(String id) {
         return Mono.just(
-                createPerson());
+                createPerson("one"));
     }
 
     public Flux<PersonBo> findAll() {
         return Flux.fromIterable(
                 Arrays.asList(
-                        createPerson(), createPerson(), createPerson()));
+                        createPerson("one"),
+                        createPerson("two"),
+                        createPerson("three")));
     }
 
     public Mono<PersonBo> findByIsoCode(String firstName) {
         return Mono.just(
-                createPerson());
+                createPerson("one"));
     }
 
 
     public Mono<PersonBo> save(Mono<PersonBo> person) {
         return Mono.just(
-                createPerson());
+                createPerson("one"));
     }
 
-    private PersonBo createPerson() {
+    private PersonBo createPerson(String lastName) {
         return PersonBo.builder()
                 .firstName("john")
-                .familyName("doe")
+                .familyName(lastName)
                 .build();
     }
 
