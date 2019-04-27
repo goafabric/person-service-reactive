@@ -14,6 +14,7 @@ public class PersonRepository {
     }
 
     public Flux<PersonBo> findAll() {
+        spin(1000);
         return Flux.fromIterable(
                 Arrays.asList(
                         createPerson("one"),
@@ -37,6 +38,12 @@ public class PersonRepository {
                 .firstName("john")
                 .familyName(lastName)
                 .build();
+    }
+
+    private static void spin(int milliseconds) {
+        long sleepTime = milliseconds*1000000L; // convert to nanoseconds
+        long startTime = System.nanoTime();
+        while ((System.nanoTime() - startTime) < sleepTime) {}
     }
 
 }
