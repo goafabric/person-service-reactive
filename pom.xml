@@ -4,41 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.goafabric</groupId>
+        <artifactId>goa-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>parent-pom/pom.xml</relativePath>
+    </parent>
+
     <groupId>org.goafabric</groupId>
     <artifactId>personservice-reactive</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <name>personservice-reactive</name>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <compiler.level>1.8</compiler.level>
-        <mapstruct.version>1.2.0.Final</mapstruct.version>
-        <spring.boot.version>2.1.4.RELEASE</spring.boot.version>
-        <lombok.version>1.18.4</lombok.version>
-        <contiperf.version>2.3.4</contiperf.version>
-
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
-        <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
-        <dockerfile-maven-plugin.version>1.4.9</dockerfile-maven-plugin.version>
-
         <docker.image.prefix>goafabric</docker.image.prefix>
     </properties>
 
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 
     <dependencies>
@@ -73,7 +54,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
 
         <dependency>
@@ -144,8 +124,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>${compiler.level}</source>
-                    <target>${compiler.level}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
 
