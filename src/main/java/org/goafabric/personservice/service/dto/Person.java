@@ -1,4 +1,4 @@
-package org.goafabric.personservice.dto;
+package org.goafabric.personservice.service.dto;
 
 import lombok.Builder;
 import lombok.Data;

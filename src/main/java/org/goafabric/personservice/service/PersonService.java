@@ -1,6 +1,6 @@
-package org.goafabric.personservice;
+package org.goafabric.personservice.service;
 
-import org.goafabric.personservice.dto.Person;
+import org.goafabric.personservice.service.dto.Person;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
