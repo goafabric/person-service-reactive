@@ -1,5 +1,6 @@
 package org.goafabric.personservice.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.logic.PersonLogic;
 import org.goafabric.personservice.service.dto.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import reactor.core.publisher.Mono;
         produces = "application/json")
 
 @RestController
+@Slf4j
 public class PersonServiceReactive {
     @Autowired
     private PersonLogic personLogic;
@@ -27,7 +29,9 @@ public class PersonServiceReactive {
 
     @GetMapping("findAll")
     public Flux<Person> findAll() {
-        return personLogic.findAll();
+        Flux<Person> persons = personLogic.findAll();
+        persons.subscribe(p -> log.info(p.toString()));
+        return persons;
     }
 
     @GetMapping("findByFirstName")
@@ -37,7 +41,7 @@ public class PersonServiceReactive {
 
 
     @PostMapping(value = "save", consumes = "application/json")
-    public Mono<Person> save(@RequestBody Person person) {
+    public Mono<Person> save(@RequestBody Mono<Person> person) {
         return personLogic.save(person);
     }
 
