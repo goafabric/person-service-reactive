@@ -15,7 +15,7 @@ public class PersonServiceReactiveClient {
 
     public Mono<Person> getById(String id) {
         return webClient.get()
-                .uri("/persons/getById/{id}")
+                .uri("/persons/getById/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(Person.class);

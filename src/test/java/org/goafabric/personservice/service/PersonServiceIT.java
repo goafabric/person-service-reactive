@@ -21,6 +21,12 @@ public class PersonServiceIT {
     private PersonServiceReactiveClient personServiceClient;
 
     @Test
+    public void getById() {
+        Person person = personServiceClient.getById("1").block();
+        assertThat(person).isNotNull();
+    }
+
+    @Test
     public void findAll() throws InterruptedException {
         Flux<Person> persons = personServiceClient.findAll();
         List<Person> personList = persons.collectList().block();
