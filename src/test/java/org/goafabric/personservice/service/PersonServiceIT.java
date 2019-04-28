@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -34,5 +35,17 @@ public class PersonServiceIT {
 
         //persons.subscribe(p -> System.out.println(p.toString()));
         //Thread.sleep(5000);
+    }
+
+    @Test
+    public void save() {
+        Person person = personServiceClient
+                .save(
+                        Mono.just(Person.builder()
+                                .firstName("alex")
+                                .lastName("kurtzman")
+                                .build()))
+                .block();
+        assertThat(person).isNotNull();
     }
 }

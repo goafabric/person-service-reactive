@@ -29,4 +29,12 @@ public class PersonServiceReactiveClient {
                 .bodyToFlux(Person.class);
     }
 
+    public Mono<Person> save(Mono<Person> person) {
+        return webClient.post()
+                .uri("/persons/save", person)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(Person.class);
+    }
 }
