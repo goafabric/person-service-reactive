@@ -8,12 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class ReactiveClientConfiguration {
     @Bean
     public WebClient webClient() {
-        return WebClient.create("localhost:8080");
-    }
-
-    @Bean
-    public PersonServiceReactiveClient personServiceReactiveClient() {
-        return new PersonServiceReactiveClient();
+        return WebClient.create("http://localhost:8080");
     }
 
 }

@@ -1,14 +1,13 @@
 package org.goafabric.personservice.service;
 
-import org.goafabric.personservice.client.PersonServiceClient;
+import org.goafabric.personservice.client.PersonServiceReactiveClient;
 import org.goafabric.personservice.service.dto.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,11 +16,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 public class PersonServiceIT {
     @Autowired
-    private PersonServiceClient personServiceClient;
+    private PersonServiceReactiveClient personServiceClient;
 
     @Test
-    public void findAll() {
-        List<Person> persons = personServiceClient.findAll();
-        assertThat(persons).isNotNull().isNotEmpty();
+    public void findAll() throws InterruptedException {
+        Flux<Person> persons = personServiceClient.findAll();
+        assertThat(persons).isNotNull();
+        //List<Person> x = persons.collectList().block();
+
+        persons.subscribe(p -> System.out.println(p.toString()));
+        //Thread.sleep(5000);
     }
 }

@@ -15,7 +15,7 @@ public class PersonServiceReactiveClient {
 
     public Mono<Person> getById(String id) {
         return webClient.get()
-                .uri("/getById/{id}")
+                .uri("/personsreactive/getById/{id}")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(Person.class);
@@ -23,7 +23,7 @@ public class PersonServiceReactiveClient {
 
     public Flux<Person> findAll() {
         return webClient.get()
-                .uri("/findAll")
+                .uri("/personsreactive/findAll")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToFlux(Person.class);
