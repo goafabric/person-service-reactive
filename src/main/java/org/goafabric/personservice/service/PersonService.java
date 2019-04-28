@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@RequestMapping(value = "/personsreactive",
+@RequestMapping(value = "/persons",
         produces = "application/json")
 
 @RestController
 @Slf4j
-public class PersonServiceReactiveBean {
+public class PersonService {
     @Autowired
     private PersonLogic personLogic;
 

@@ -2,7 +2,7 @@ package org.goafabric.personservice.service;
 
 import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.junit.ContiPerfRule;
-import org.goafabric.personservice.client.PersonServiceClient;
+import org.goafabric.personservice.client.PersonServiceReactiveClient;
 import org.goafabric.personservice.service.dto.Person;
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 public class PersonServiceLoadNRIT {
     @Autowired
-    private PersonServiceClient personServiceClient;
+    private PersonServiceReactiveClient personServiceClient;
 
     @Rule
     public ContiPerfRule rule = new ContiPerfRule();
@@ -28,7 +28,8 @@ public class PersonServiceLoadNRIT {
     @PerfTest(invocations=500000, threads=10)
     @Test
     public void findAll() {
-        List<Person> persons = personServiceClient.findAll();
+        List<Person> persons =
+                personServiceClient.findAll().collectList().block();
         assertThat(persons).isNotNull().isNotEmpty();
     }
 }
