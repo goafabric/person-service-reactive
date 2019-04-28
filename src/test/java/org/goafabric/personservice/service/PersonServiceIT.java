@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -21,10 +23,10 @@ public class PersonServiceIT {
     @Test
     public void findAll() throws InterruptedException {
         Flux<Person> persons = personServiceClient.findAll();
-        assertThat(persons).isNotNull();
-        //List<Person> x = persons.collectList().block();
+        List<Person> personList = persons.collectList().block();
+        assertThat(personList).isNotNull();
 
-        persons.subscribe(p -> System.out.println(p.toString()));
+        //persons.subscribe(p -> System.out.println(p.toString()));
         //Thread.sleep(5000);
     }
 }
