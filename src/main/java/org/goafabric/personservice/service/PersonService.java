@@ -35,13 +35,13 @@ public class PersonService {
     }
 
     @GetMapping("findByFirstName")
-    public Mono<Person> findByIsoCode(@RequestParam("firstName") String firstName) {
-        return personLogic.findByIsoCode(firstName);
+    public Flux<Person> findByFirstName(@RequestParam("firstName") String firstName) {
+        return personLogic.findByFirstName(firstName);
     }
 
 
     @PostMapping(value = "save", consumes = "application/json")
-    public Mono<Person> save(@RequestBody Mono<Person> person) {
+    public Mono<Person> save(@RequestBody Person person) {
         return personLogic.save(person);
     }
 

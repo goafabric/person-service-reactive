@@ -17,7 +17,7 @@ public class PersonLogic {
     private PersonRepository personRepository;
 
     public Mono<Person> getById(String id) {
-        return personRepository.getById(id)
+        return personRepository.findById(id)
                 .map(personMapper::toDto);
     }
 
@@ -26,17 +26,16 @@ public class PersonLogic {
                 .map(personMapper::toDto);
     }
 
-    public Mono<Person> findByIsoCode(String firstName) {
-        return personRepository.findByIsoCode(firstName)
+    public Flux<Person> findByFirstName(String firstName) {
+        return personRepository.findByFirstName(firstName)
                 .map(personMapper::toDto);
     }
 
 
-    public Mono<Person> save(Mono<Person> person) {
+    public Mono<Person> save(Person person) {
         return personRepository.save(
-                person.map(personMapper::toBo))
+                personMapper.toBo(person))
                 .map(personMapper::toDto);
     }
-
 
 }
