@@ -2,4 +2,4 @@
 - http://localhost:8080/persons/findAll
 
 # Todo
-- Mongodb
+- Mongodb + Postgres
