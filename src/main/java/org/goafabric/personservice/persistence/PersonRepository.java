@@ -1,49 +1,10 @@
 package org.goafabric.personservice.persistence;
 
-import org.springframework.stereotype.Component;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
-import java.util.Arrays;
-
-@Component
-public class PersonRepository {
-    public Mono<PersonBo> getById(String id) {
-        return Mono.just(
-                createPerson("one"));
-    }
-
-    public Flux<PersonBo> findAll() {
-        spin(1000);
-        return Flux.fromIterable(
-                Arrays.asList(
-                        createPerson("one"),
-                        createPerson("two"),
-                        createPerson("three")));
-    }
-
-    public Mono<PersonBo> findByIsoCode(String firstName) {
-        return Mono.just(
-                createPerson("one"));
-    }
-
-
-    public Mono<PersonBo> save(Mono<PersonBo> person) {
-        return Mono.just(
-                createPerson("one"));
-    }
-
-    private PersonBo createPerson(String lastName) {
-        return PersonBo.builder()
-                .firstName("john")
-                .familyName(lastName)
-                .build();
-    }
-
-    private static void spin(int milliseconds) {
-        long sleepTime = milliseconds*1000000L; // convert to nanoseconds
-        long startTime = System.nanoTime();
-        while ((System.nanoTime() - startTime) < sleepTime) {}
-    }
+public interface PersonRepository extends ReactiveMongoRepository<PersonBo, String> {
+    Flux<PersonBo> findByFirstName(String firstName);
 
 }
+

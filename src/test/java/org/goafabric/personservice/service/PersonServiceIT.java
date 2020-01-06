@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -22,30 +21,22 @@ public class PersonServiceIT {
     private PersonServiceReactiveClient personServiceClient;
 
     @Test
-    public void getById() {
-        Person person = personServiceClient.getById("1").block();
-        assertThat(person).isNotNull();
-    }
-
-    @Test
-    public void findAll() throws InterruptedException {
+    public void findAll() {
         Flux<Person> persons = personServiceClient.findAll();
         List<Person> personList = persons.collectList().block();
         assertThat(personList).isNotNull();
-
-        //persons.subscribe(p -> System.out.println(p.toString()));
-        //Thread.sleep(5000);
     }
 
+    /*
     @Test
     public void save() {
         Person person = personServiceClient
-                .save(
-                        Mono.just(Person.builder()
-                                .firstName("alex")
-                                .lastName("kurtzman")
-                                .build()))
-                .block();
+                .save(Person.builder()
+                        .firstName("alex")
+                        .lastName("kurtzman")
+                        .build()).block();
         assertThat(person).isNotNull();
     }
+
+     */
 }
