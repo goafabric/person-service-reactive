@@ -1,0 +1,30 @@
+server:
+  port: 8080
+  tomcat.max-threads: 20
+
+#    http2:
+#      enabled: true
+#    ssl:
+#      key-store: classpath:keystore.jks
+#      key-store-password: password
+
+management:
+    endpoint:
+      health:
+        show-details: always
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+info:
+    status: ok
+
+
+spring:
+    data:
+      mongodb:
+        port: 60000
+        min-connections-per-host: 10
+        max-connections-per-host: 100
+        connect-timeout: 10000
